@@ -1,0 +1,23 @@
+#######################################
+# Syntax Coloring Map EasyTransfer
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+EasyTransfer	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+Button	KEYWORD2
+sendData	KEYWORD2
+receiveData	KEYWORD2
+init	KEYWORD2
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+details	LITERAL1
