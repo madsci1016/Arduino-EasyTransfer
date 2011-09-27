@@ -41,6 +41,19 @@ GNU General Public License for more details.
 ******************************************************************/
 
 
+********************To Install*************************************
+
+To install, unzip and place 'EasyTransfer' folder into your 'C:\Users\{user name}\Documents\Arduino\libraries' folder or '{Arduino IDE path}\hardware\libraries" or {Arduino IDE path}\libraries" directory. 
+
+Restart the Arduino IDE, look for the Library under "Sketch" -> "Import Library". You can also try the examples by finding them
+under "File" -> "Examples" -> "EasyTransfer".
+
+All uses of the library are in the example sketchs. 
+
+
+*******************************************************************
+
+
 Library now has two versions, one for regular hardware Serial, one for use with the NewSoftSerial library
 making any Arduino pin capable of transfering data back and forth easily. 
 
