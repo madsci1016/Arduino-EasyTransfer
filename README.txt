@@ -1,5 +1,5 @@
 /******************************************************************
-*  EasyTransfer Arduino Library v1.6
+*  EasyTransfer Arduino Library v1.7
 *		details and example sketch: 
 *			http://www.billporter.info/easytransfer-arduino-library/
 *
