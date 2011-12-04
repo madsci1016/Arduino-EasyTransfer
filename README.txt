@@ -17,7 +17,8 @@
 *			I'm good at dumb mistakes
 *	1.7  Fixed a bug where the receive function could block for too long and never process data correctly
 *		    Organized the examples to be Arduino IDE compatible
-*
+*	1.8
+*		Now Arduino 1.0 compatible!
 *
 *
 *  Limits of the Library

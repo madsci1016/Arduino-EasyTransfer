@@ -29,7 +29,11 @@ GNU General Public License for more details.
 #define details(name) (byte*)&name,sizeof(name)
 
 //Not neccessary, but just in case. 
+#if ARDUINO > 22
+#include "Arduino.h"
+#else
 #include "WProgram.h"
+#endif
 #include "HardwareSerial.h"
 //#include <NewSoftSerial.h>
 #include <math.h>
