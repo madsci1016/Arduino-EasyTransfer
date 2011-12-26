@@ -28,9 +28,7 @@ void setup(){
   
 }
 
-void loop() {}
-
-void receive(int numBytes){
+void loop() {
   //check and see if a data packet has come in. 
   if(ET.receiveData()){
     //this is how you access the variables. [name of the group].[variable name]
@@ -43,3 +41,5 @@ void receive(int numBytes){
     }
   }
 }
+
+void receive(int numBytes) {}
