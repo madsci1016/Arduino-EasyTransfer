@@ -1,15 +1,11 @@
 /******************************************************************
-*  EasyTransfer Arduino Library v2.0
+*  EasyTransfer Arduino Library v1.7
 *		details and example sketch: 
 *			http://www.billporter.info/easytransfer-arduino-library/
 *
 *		Brought to you by:
 *              Bill Porter
 *              www.billporter.info
-*
-*		Major props to Mathieu Alorent (kumy) for 
-*		  I2C version and the pretty pictures.
-*
 *
 *  Lib version history
 *	1.0  Created
@@ -23,18 +19,11 @@
 *		    Organized the examples to be Arduino IDE compatible
 *	1.8
 *		Now Arduino 1.0 compatible!
-*   1.81
-*		Made it more cross compatible. Man, They really made us work for this one. 
-*	2.0
-*		Combined SoftEasyTransfer with the other two to make everything one repo
-*		Added EasyTransferVirtualWire library for use with Virtual Wire and cheap radios.
-*			UNTESTED!
 *
 *
 *  Limits of the Library
 *		You can change the Serial port,
 *		but the Struct size must not pass 255 bytes
-*		VirtualWire Version Struct can'e be bigger then 26 bytes
 *
 *   The protcol is as follows:
 *		Header(0x06,0x85),SizeofPayload,Payload,Checksum

@@ -6,7 +6,7 @@
 # Datatypes (KEYWORD1)
 #######################################
 
-EasyTransferI2C	KEYWORD1
+SoftEasyTransfer	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)

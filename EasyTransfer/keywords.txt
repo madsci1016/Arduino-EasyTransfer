@@ -11,10 +11,9 @@ EasyTransfer	KEYWORD1
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-Button	KEYWORD2
 sendData	KEYWORD2
 receiveData	KEYWORD2
-init	KEYWORD2
+begin	KEYWORD2
 
 
 #######################################
