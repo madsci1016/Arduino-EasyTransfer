@@ -46,6 +46,9 @@ boolean EasyTransferVirtualWire::receiveData(){
 		
 		if (buf[0] == 0x06 && buf[1] == 0x85 && buf[2] == size) {
 			//found my headers, size matches
+			
+			calc_CS = buf[2]; // must be added after the header is received
+			
 			for(int i = 0; i<size; i++){
 				calc_CS^=buf[i+3];
 				}
@@ -53,7 +56,7 @@ boolean EasyTransferVirtualWire::receiveData(){
 			//compare CS
 			if (calc_CS == buf[size+3]){
 				//all good if here, warm up the photo copier
-				memcpy(address,&buf+3,size);
+				memcpy(address,buf+3,size);
 				calc_CS = 0;
 				return true;
 				}

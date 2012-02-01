@@ -1,5 +1,5 @@
 /******************************************************************
-*  EasyTransfer Arduino Library v2.0
+*  EasyTransfer Arduino Library v2.0.1
 *		details and example sketch: 
 *			http://www.billporter.info/easytransfer-arduino-library/
 *
@@ -25,10 +25,11 @@
 *		Now Arduino 1.0 compatible!
 *   1.81
 *		Made it more cross compatible. Man, They really made us work for this one. 
-*	2.0
-*		Combined SoftEasyTransfer with the other two to make everything one repo
-*		Added EasyTransferVirtualWire library for use with Virtual Wire and cheap radios.
-*			UNTESTED!
+*   2.0
+*       Combined SoftEasyTransfer with the other two to make everything one repo
+*           Added EasyTransferVirtualWire library for use with Virtual Wire and cheap radios.
+*   2.0.1
+*       VirtualWire version tested by garth@netram, bugs fixed. 
 *
 *
 *  Limits of the Library
