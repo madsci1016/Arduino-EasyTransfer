@@ -6,17 +6,23 @@
 #if ARDUINO > 22
 //Captures address and size of struct
 void SoftEasyTransfer::begin(uint8_t * ptr, uint8_t length, SoftwareSerial *theSerial){
-address = ptr;
-size = length;
-_serial = theSerial;
+	address = ptr;
+	size = length;
+	_serial = theSerial;
+
+	//dynamic creation of rx parsing buffer in RAM
+	rx_buffer = (uint8_t*) malloc(size);
 }
 
 #else
 //Captures address and size of struct
 void SoftEasyTransfer::begin(uint8_t * ptr, uint8_t length, NewSoftSerial *theSerial){
-address = ptr;
-size = length;
-_serial = theSerial;
+	address = ptr;
+	size = length;
+	_serial = theSerial;
+	
+	//dynamic creation of rx parsing buffer in RAM
+	rx_buffer = (uint8_t*) malloc(size);
 }
 
 #endif
@@ -80,7 +86,7 @@ boolean SoftEasyTransfer::receiveData(){
   
   if(rx_len != 0){
     while(_serial->available() && rx_array_inx <= rx_len){
-      rx_array[rx_array_inx++] = _serial->read();
+      rx_buffer[rx_array_inx++] = _serial->read();
     }
     
     if(rx_len == (rx_array_inx-1)){
@@ -88,11 +94,11 @@ boolean SoftEasyTransfer::receiveData(){
       //last uint8_t is CS
       calc_CS = rx_len;
       for (int i = 0; i<rx_len; i++){
-        calc_CS^=rx_array[i];
+        calc_CS^=rx_buffer[i];
       } 
       
-      if(calc_CS == rx_array[rx_array_inx-1]){//CS good
-        memcpy(address,&rx_array,size);
+      if(calc_CS == rx_buffer[rx_array_inx-1]){//CS good
+        memcpy(address,rx_buffer,size);
 		rx_len = 0;
 		rx_array_inx = 0;
 		return true;

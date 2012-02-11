@@ -5,9 +5,12 @@
 
 //Captures address and size of struct
 void EasyTransfer::begin(uint8_t * ptr, uint8_t length, HardwareSerial *theSerial){
-address = ptr;
-size = length;
-_serial = theSerial;
+	address = ptr;
+	size = length;
+	_serial = theSerial;
+	
+	//dynamic creation of rx parsing buffer in RAM
+	rx_buffer = (uint8_t*) malloc(size);
 }
 
 //Sends out struct in binary, with header, length info and checksum
@@ -52,7 +55,7 @@ boolean EasyTransfer::receiveData(){
   //we get here if we already found the header bytes, the struct size matched what we know, and now we are byte aligned.
   if(rx_len != 0){
     while(_serial->available() && rx_array_inx <= rx_len){
-      rx_array[rx_array_inx++] = _serial->read();
+      rx_buffer[rx_array_inx++] = _serial->read();
     }
     
     if(rx_len == (rx_array_inx-1)){
@@ -60,11 +63,11 @@ boolean EasyTransfer::receiveData(){
       //last uint8_t is CS
       calc_CS = rx_len;
       for (int i = 0; i<rx_len; i++){
-        calc_CS^=rx_array[i];
+        calc_CS^=rx_buffer[i];
       } 
       
-      if(calc_CS == rx_array[rx_array_inx-1]){//CS good
-        memcpy(address,&rx_array,size);
+      if(calc_CS == rx_buffer[rx_array_inx-1]){//CS good
+        memcpy(address,rx_buffer,size);
 		rx_len = 0;
 		rx_array_inx = 0;
 		return true;

@@ -5,9 +5,12 @@
 
 //Captures address and size of struct
 void EasyTransferI2C::begin(uint8_t * ptr, uint8_t length, TwoWire *theSerial){
-address = ptr;
-size = length;
-_serial = theSerial;
+	address = ptr;
+	size = length;
+	_serial = theSerial;
+
+	//dynamic creation of rx parsing buffer in RAM
+	rx_buffer = (uint8_t*) malloc(size);
 }
 
 //Sends out struct in binary, with header, length info and checksum
@@ -77,9 +80,9 @@ boolean EasyTransferI2C::receiveData(){
   if(rx_len != 0){
     while(_serial->available() && rx_array_inx <= rx_len){
 #if ARDUINO >= 100
-      rx_array[rx_array_inx++] = _serial->read();
+      rx_buffer[rx_array_inx++] = _serial->read();
 #else
-      rx_array[rx_array_inx++] = _serial->receive();
+      rx_buffer[rx_array_inx++] = _serial->receive();
 #endif
     }
     
@@ -88,11 +91,11 @@ boolean EasyTransferI2C::receiveData(){
       //last uint8_t is CS
       calc_CS = rx_len;
       for (int i = 0; i<rx_len; i++){
-        calc_CS^=rx_array[i];
+        calc_CS^=rx_buffer[i];
       } 
       
-      if(calc_CS == rx_array[rx_array_inx-1]){//CS good
-        memcpy(address,&rx_array,size);
+      if(calc_CS == rx_buffer[rx_array_inx-1]){//CS good
+        memcpy(address,rx_buffer,size);
 		rx_len = 0;
 		rx_array_inx = 0;
 		return true;

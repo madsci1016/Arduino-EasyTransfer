@@ -1,5 +1,5 @@
 /******************************************************************
-*  EasyTransfer Arduino Library v2.0.1
+*  EasyTransfer Arduino Library v2.1
 *		details and example sketch: 
 *			http://www.billporter.info/easytransfer-arduino-library/
 *
@@ -30,6 +30,8 @@
 *           Added EasyTransferVirtualWire library for use with Virtual Wire and cheap radios.
 *   2.0.1
 *       VirtualWire version tested by garth@netram, bugs fixed. 
+*   2.1
+*	   Changes RX parsing buffer to dynamic allocation to conserve RAM.
 *
 *
 *  Limits of the Library
