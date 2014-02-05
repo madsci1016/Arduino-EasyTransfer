@@ -1,14 +1,18 @@
 #include "EasyTransfer.h"
 
-
-
-
+#if defined(SoftwareSerial_h)
+void EasyTransfer::begin(uint8_t * ptr, uint8_t length, SoftSerial *theSerial){
+#elif defined(__AVR_ATmega32U4__)
 //Captures address and size of struct
+void EasyTransfer::begin(uint8_t * ptr, uint8_t length, Serial_ *theSerial){
+#else
 void EasyTransfer::begin(uint8_t * ptr, uint8_t length, HardwareSerial *theSerial){
+#endif
 	address = ptr;
 	size = length;
+
 	_serial = theSerial;
-	
+
 	//dynamic creation of rx parsing buffer in RAM
 	rx_buffer = (uint8_t*) malloc(size);
 }

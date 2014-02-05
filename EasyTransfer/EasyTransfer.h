@@ -35,7 +35,7 @@ GNU General Public License for more details.
 #include "WProgram.h"
 #endif
 #include "HardwareSerial.h"
-//#include <NewSoftSerial.h>
+#include <SoftSerial.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -43,13 +43,27 @@ GNU General Public License for more details.
 
 class EasyTransfer {
 public:
+
+#if defined(SoftwareSerial_h)
+void begin(uint8_t *, uint8_t, SoftSerial *theSerial);
+#elif defined(__AVR_ATmega32U4__)
+void begin(uint8_t *, uint8_t, Serial_ *theSerial);
+#else
 void begin(uint8_t *, uint8_t, HardwareSerial *theSerial);
-//void begin(uint8_t *, uint8_t, NewSoftSerial *theSerial);
+#endif
+
 void sendData();
 boolean receiveData();
 private:
+
+#if defined(SoftwareSerial_h)
+SoftSerial *_serial;
+#elif defined(__AVR_ATmega32U4__)
+Serial_ *_serial;
+#else
 HardwareSerial *_serial;
-//NewSoftSerial *_serial;
+#endif
+
 uint8_t * address;  //address of struct
 uint8_t size;       //size of struct
 uint8_t * rx_buffer; //address for temporary storage and parsing buffer
