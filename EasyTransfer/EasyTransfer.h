@@ -35,7 +35,9 @@ GNU General Public License for more details.
 #include "WProgram.h"
 #endif
 #include "HardwareSerial.h"
-#include <SoftSerial.h>
+#if !defined(CORE_TEENSY)
+#include <SoftwareSerial.h>
+#endif
 #include <math.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -44,7 +46,10 @@ GNU General Public License for more details.
 class EasyTransfer {
 public:
 
-#if defined(SoftwareSerial_h)
+
+#if defined(CORE_TEENSY)
+void begin(uint8_t *, uint8_t, usb_serial_class *theSerial);
+#elif defined(SoftwareSerial_h)
 void begin(uint8_t *, uint8_t, SoftSerial *theSerial);
 #elif defined(__AVR_ATmega32U4__)
 void begin(uint8_t *, uint8_t, Serial_ *theSerial);
@@ -56,7 +61,9 @@ void sendData();
 boolean receiveData();
 private:
 
-#if defined(SoftwareSerial_h)
+#if defined(CORE_TEENSY)
+usb_serial_class *_serial;
+#elif defined(SoftwareSerial_h)
 SoftSerial *_serial;
 #elif defined(__AVR_ATmega32U4__)
 Serial_ *_serial;

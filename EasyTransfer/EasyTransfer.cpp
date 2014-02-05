@@ -1,13 +1,15 @@
 #include "EasyTransfer.h"
 
-#if defined(SoftwareSerial_h)
+#if defined(CORE_TEENSY)
+void EasyTransfer::begin(uint8_t * ptr, uint8_t length, usb_serial_class *theSerial){
+#elif defined(SoftwareSerial_h)
 void EasyTransfer::begin(uint8_t * ptr, uint8_t length, SoftSerial *theSerial){
 #elif defined(__AVR_ATmega32U4__)
-//Captures address and size of struct
 void EasyTransfer::begin(uint8_t * ptr, uint8_t length, Serial_ *theSerial){
 #else
 void EasyTransfer::begin(uint8_t * ptr, uint8_t length, HardwareSerial *theSerial){
 #endif
+//Captures address and size of struct
 	address = ptr;
 	size = length;
 
