@@ -34,7 +34,7 @@ GNU General Public License for more details.
 #else
 #include "WProgram.h"
 #endif
-#include "HardwareSerial.h"
+#include "Stream.h"
 #if !defined(CORE_TEENSY)
 #include <SoftwareSerial.h>
 #endif
@@ -45,30 +45,27 @@ GNU General Public License for more details.
 
 class EasyTransfer {
 public:
-
-
 #if defined(CORE_TEENSY)
-void begin(uint8_t *, uint8_t, usb_serial_class *theSerial);
+void begin(uint8_t *, uint8_t, usb_serial_class *theStream);
 #elif defined(SoftwareSerial_h)
-void begin(uint8_t *, uint8_t, SoftSerial *theSerial);
+void begin(uint8_t *, uint8_t, SoftSerial *theStream);
 #elif defined(__AVR_ATmega32U4__)
-void begin(uint8_t *, uint8_t, Serial_ *theSerial);
+void begin(uint8_t *, uint8_t, Serial_ *theStream);
 #else
-void begin(uint8_t *, uint8_t, HardwareSerial *theSerial);
+  void begin(uint8_t *, uint8_t, Stream *theStream);
 #endif
 
 void sendData();
 boolean receiveData();
 private:
-
 #if defined(CORE_TEENSY)
-usb_serial_class *_serial;
+usb_serial_class *_stream;
 #elif defined(SoftwareSerial_h)
-SoftSerial *_serial;
+SoftSerial *_stream;
 #elif defined(__AVR_ATmega32U4__)
-Serial_ *_serial;
+Serial_ *_stream;
 #else
-HardwareSerial *_serial;
+Stream *_stream;
 #endif
 
 uint8_t * address;  //address of struct
