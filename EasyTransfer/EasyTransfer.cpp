@@ -10,7 +10,7 @@ void EasyTransfer::begin(uint8_t * ptr, uint8_t length, Stream *theStream){
 	_stream = theStream;
 	
 	//dynamic creation of rx parsing buffer in RAM
-	rx_buffer = (uint8_t*) malloc(size);
+	rx_buffer = (uint8_t*) malloc(size+1);
 }
 
 //Sends out struct in binary, with header, length info and checksum
