@@ -36,10 +36,10 @@ GNU General Public License for more details.
 #endif
 #include "Stream.h"
 //#include <NewSoftSerial.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdint.h>
-#include <avr/io.h>
+//#include <math.h>
+//#include <stdio.h>
+//#include <stdint.h>
+//#include <avr/io.h>
 
 class EasyTransfer {
 public:
