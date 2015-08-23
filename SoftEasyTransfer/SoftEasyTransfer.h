@@ -28,15 +28,13 @@ GNU General Public License for more details.
 //make it a little prettier on the front end. 
 #define details(name) (byte*)&name,sizeof(name)
 
-//Not neccessary, but just in case. 
-#if ARDUINO > 22
+#if ARDUINO >= 100
 #include "Arduino.h"
 #include <SoftwareSerial.h>
 #else
 #include "WProgram.h"
 #include <NewSoftSerial.h>
 #endif
-//#include "HardwareSerial.h"
 
 
 #include <math.h>
