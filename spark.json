@@ -1,0 +1,8 @@
+{
+  "name": "EasyTransfer",
+  "author": "Bill Porter, modified by Ricardo Alves",
+  "license": "GNU GPLv3",
+  "version": "2.1",
+  "description": "An Implementation of I2C communication method created by Bill Porter to the Particle environment.",
+  "namespace": "EasyTransfer"
+}
