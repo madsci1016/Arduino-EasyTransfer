@@ -9,8 +9,8 @@ struct SEND_DATA_STRUCTURE{
   //put your variable definitions here for the data you want to send
   //THIS MUST BE EXACTLY THE SAME ON THE OTHER ARDUINO
   //Struct can'e be bigger then 26 bytes for VirtualWire version
-  int blinks;
-  int pause;
+  int16_t blinks;
+  int16_t pause;
 };
 
 //give a name to the group of data

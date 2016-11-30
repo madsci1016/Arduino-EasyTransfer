@@ -1,34 +1,33 @@
-#include <VirtualWire.h>
-#include <EasyTransferVirtualWire.h>
+#include <SoftEasyTransfer.h>
+
+/*   For Arduino 1.0 and newer, do this:   */
+#include <SoftwareSerial.h>
+SoftwareSerial mySerial(2, 3);
+
+/*   For Arduino 22 and older, do this:   */
+//#include <NewSoftSerial.h>
+//NewSoftSerial mySerial(2, 3);
 
 
 //create object
-EasyTransferVirtualWire ET; 
+SoftEasyTransfer ET; 
 
-struct SEND_DATA_STRUCTURE{
-  //put your variable definitions here for the data you want to send
+struct RECEIVE_DATA_STRUCTURE{
+  //put your variable definitions here for the data you want to receive
   //THIS MUST BE EXACTLY THE SAME ON THE OTHER ARDUINO
-  //Struct can'e be bigger then 26 bytes for VirtualWire version
-  int blinks;
-  int pause;
+  int16_t blinks;
+  int16_t pause;
 };
 
 //give a name to the group of data
-SEND_DATA_STRUCTURE mydata;
+RECEIVE_DATA_STRUCTURE mydata;
 
 void setup(){
-  //start the library, pass in the data details
-  ET.begin(details(mydata));
-  
-  // Initialise the IO and ISR
-  vw_set_ptt_inverted(true); // Required for DR3100
-  vw_setup(2000);	 // Bits per sec
-
-  vw_rx_start();       // Start the receiver PLL running
+  mySerial.begin(9600);
+  //start the library, pass in the data details and the name of the serial port.
+  ET.begin(details(mydata), &mySerial);
   
   pinMode(13, OUTPUT);
-  
-  randomSeed(analogRead(0));
   
 }
 
@@ -44,8 +43,6 @@ void loop(){
       delay(mydata.pause * 100);
     }
   }
-  
   //you should make this delay shorter then your transmit delay or else messages could be lost
   delay(250);
 }
-
