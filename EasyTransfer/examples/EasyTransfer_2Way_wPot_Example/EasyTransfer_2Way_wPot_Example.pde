@@ -24,14 +24,14 @@ EasyTransfer ETin, ETout;
 struct RECEIVE_DATA_STRUCTURE{
   //put your variable definitions here for the data you want to receive
   //THIS MUST BE EXACTLY THE SAME ON THE OTHER ARDUINO
-  int buttonstate;
+  int16_t buttonstate;
 };
 
 struct SEND_DATA_STRUCTURE{
   //put your variable definitions here for the data you want to receive
   //THIS MUST BE EXACTLY THE SAME ON THE OTHER ARDUINO
-  int buttonstate;
-  int servoval;
+  int16_t buttonstate;
+  int16_t servoval;
 };
 
 //give a name to the group of data
@@ -46,9 +46,8 @@ void setup(){
   ETout.begin(details(txdata), &Serial);
   
   pinMode(13, OUTPUT);  
-  pinMode(12, INPUT);
   //enable pull-up
-  digitalWrite(12, HIGH);
+  pinMode(12, INPUT_PULLUP);
   
 }
 

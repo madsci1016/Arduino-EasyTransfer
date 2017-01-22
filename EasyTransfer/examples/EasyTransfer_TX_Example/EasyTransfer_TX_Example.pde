@@ -6,8 +6,8 @@ EasyTransfer ET;
 struct SEND_DATA_STRUCTURE{
   //put your variable definitions here for the data you want to send
   //THIS MUST BE EXACTLY THE SAME ON THE OTHER ARDUINO
-  int blinks;
-  int pause;
+  int16_t blinks;
+  int16_t pause;
 };
 
 //give a name to the group of data
