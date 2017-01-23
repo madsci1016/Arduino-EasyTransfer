@@ -42,6 +42,34 @@ void EasyTransferI2C::sendData(uint8_t i2c_address){
   _serial->endTransmission();
 }
 
+// Sends out struct in binary, with header, length info and checksum
+// Pack everything in a buffer, and send in one write 
+// Use this in the slaves request handler, where only one write is allowed.
+// Size must not exceed the twi/Wire buffer length (32 bytes by default)
+// Automatic limit could be implemented later
+// Tested between arduinos with 64 byte buffer and 34 bytes of data
+// Adress should still be the target adress, as it is necessary for the cheksum
+void EasyTransferI2C::sendDataPerRequest(uint8_t i2c_address){
+	byte requestBuffer[size + 4];
+	uint8_t CS = size;
+	
+	requestBuffer[0] = 0x06;
+	requestBuffer[1] = 0x85;
+	requestBuffer[2] = size;
+	
+	int i = 0;
+	while (i<size)
+	{
+		CS^=*(address+i);
+		requestBuffer[i+3] = *(address+i);
+		i++;
+	}
+	
+	requestBuffer[size+3] = CS;
+	
+	_serial->write(requestBuffer, size + 4);
+}
+
 boolean EasyTransferI2C::receiveData(){
   
   //start off by looking for the header bytes. If they were already found in a previous call, skip it.
