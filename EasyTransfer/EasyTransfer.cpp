@@ -85,3 +85,7 @@ boolean EasyTransfer::receiveData(){
   
   return false;
 }
+
+~EasyTransfer(){
+    free(rx_buffer);
+}
