@@ -5,6 +5,8 @@
 
 //Captures address and size of struct
 void EasyTransfer::begin(uint8_t * ptr, uint8_t length, Stream *theStream){
+	rx_len = 0;
+	rx_array_inx = 0;
 	address = ptr;
 	size = length;
 	_stream = theStream;

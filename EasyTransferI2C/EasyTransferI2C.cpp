@@ -5,6 +5,8 @@
 
 //Captures address and size of struct
 void EasyTransferI2C::begin(uint8_t * ptr, uint8_t length, TwoWire *theSerial){
+	rx_len = 0;
+	rx_array_inx = 0;
 	address = ptr;
 	size = length;
 	_serial = theSerial;

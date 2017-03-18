@@ -6,6 +6,8 @@
 #if ARDUINO > 22
 //Captures address and size of struct
 void SoftEasyTransfer::begin(uint8_t * ptr, uint8_t length, SoftwareSerial *theSerial){
+	rx_len = 0;
+	rx_array_inx = 0;
 	address = ptr;
 	size = length;
 	_serial = theSerial;
@@ -17,6 +19,8 @@ void SoftEasyTransfer::begin(uint8_t * ptr, uint8_t length, SoftwareSerial *theS
 #else
 //Captures address and size of struct
 void SoftEasyTransfer::begin(uint8_t * ptr, uint8_t length, NewSoftSerial *theSerial){
+	rx_len = 0;
+	rx_array_inx = 0;
 	address = ptr;
 	size = length;
 	_serial = theSerial;
