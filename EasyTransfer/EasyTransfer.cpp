@@ -1,14 +1,20 @@
 #include "EasyTransfer.h"
 
-
-
-
-//Captures address and size of struct
+#if defined(CORE_TEENSY)
+void EasyTransfer::begin(uint8_t * ptr, uint8_t length, usb_serial_class *theStream){
+#elif defined(SoftwareSerial_h)
+void EasyTransfer::begin(uint8_t * ptr, uint8_t length, SoftSerial *theStream){
+#elif defined(__AVR_ATmega32U4__)
+void EasyTransfer::begin(uint8_t * ptr, uint8_t length, Serial_ *theStream){
+#else
 void EasyTransfer::begin(uint8_t * ptr, uint8_t length, Stream *theStream){
+#endif
+//Captures address and size of struct	
 	rx_len = 0;
 	rx_array_inx = 0;
 	address = ptr;
 	size = length;
+	
 	_stream = theStream;
 	
 	//dynamic creation of rx parsing buffer in RAM
