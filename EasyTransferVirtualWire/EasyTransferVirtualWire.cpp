@@ -51,7 +51,7 @@ boolean EasyTransferVirtualWire::receiveData(){
 			
 			for(int i = 0; i<size; i++){
 				calc_CS^=buf[i+3];
-				}
+			}
 			
 			//compare CS
 			if (calc_CS == buf[size+3]){
@@ -59,7 +59,7 @@ boolean EasyTransferVirtualWire::receiveData(){
 				memcpy(address,buf+3,size);
 				calc_CS = 0;
 				return true;
-				}
+			}
 			else {//bad CS
 				calc_CS = 0;
 				return false;
@@ -68,7 +68,6 @@ boolean EasyTransferVirtualWire::receiveData(){
 			//need to extract what my library wants to see.
 	
 	}
-	else
-		return false;
 
+	return false;
 }
