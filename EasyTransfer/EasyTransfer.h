@@ -47,6 +47,7 @@ void begin(uint8_t *, uint8_t, Stream *theStream);
 //void begin(uint8_t *, uint8_t, NewSoftSerial *theSerial);
 void sendData();
 boolean receiveData();
+~EasyTransfer();
 private:
 Stream *_stream;
 //NewSoftSerial *_serial;
