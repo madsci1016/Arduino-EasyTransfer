@@ -48,6 +48,7 @@ class EasyTransferI2C {
 public:
 void begin(uint8_t *, uint8_t, TwoWire *theSerial);
 void sendData(uint8_t address);
+void sendDataPerRequest(uint8_t address);
 boolean receiveData();
 private:
 TwoWire *_serial;
